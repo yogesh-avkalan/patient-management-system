@@ -1,20 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const fontSans = Plus_Jakarta_Sans({
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Patient Management System",
-  description: "Manage patien ",
+  title: "CarePulse",
+  description: "Manage patients",
 };
 
 export default function RootLayout({
@@ -25,8 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
+        className={cn(
+          "min-h-screen bg-dark-300 font-sans antialiased",
+          fontSans.variable
+        )}>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
